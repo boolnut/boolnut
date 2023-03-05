@@ -3,13 +3,17 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+use Boolnut\Core\Inc\Console\ControllerCommand;
 use Boolnut\Core\Inc\Console\GreetingCommand;
+use Boolnut\Core\Inc\Console\ServeCommand;
 use Symfony\Component\Console\Application;
 
 $kernel = new Application();
 
 $commands = [
     GreetingCommand::class,
+    ServeCommand::class,
+    ControllerCommand::class,
 ];
 
 foreach ($commands as $class) {
