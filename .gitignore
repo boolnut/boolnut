@@ -1,0 +1,9 @@
+vendor
+logs
+.idea
+.env
+/composer.lock
+uploads
+.DS_Store
+.htaccess
+.htpasswd
