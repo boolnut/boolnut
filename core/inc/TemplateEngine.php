@@ -20,12 +20,12 @@ function redirect($path)
  * This function returns the view of a page.
  */
 
-function tView($name, $data = [])
+function view($name, $data = [])
 {
     extract($data);
 
     $path = "app/views/";
-    $ext = ".view.twig";
+    $ext = ".nut.twig";
 
     $loader = new FilesystemLoader('app/views');
     $twig = new Environment($loader, [
@@ -35,31 +35,33 @@ function tView($name, $data = [])
 
     if (!file_exists("$path{$name}$ext")) {
         header('HTTP/1.0 404 Not Found');
-        return iView("error/404");
+        return errorEngineView("error/404");
     } else {
         try {
             return $twig->render("{$name}$ext", $data);
         } catch (LoaderError $e) {
             App::logError('There was a Twig LoaderError Exception. Details: ' . $e);
             header('HTTP/1.0 404 Twig LoaderError');
-            return iView("error/404", ['error' => $e]);
+            return errorEngineView("error/404", ['error' => $e]);
         } catch (RuntimeError $e) {
             App::logError('There was a Twig RuntimeError Exception. Details: ' . $e);
             header('HTTP/1.0 404 wig RuntimeError');
-            return iView("error/404", ['error' => $e]);
+            return errorEngineView("error/404", ['error' => $e]);
         } catch (SyntaxError $e) {
             App::logError('There was a Twig SyntaxError Exception. Details: ' . $e);
             header('HTTP/1.0 404 Twig SyntaxError');
-            return iView("error/404", ['error' => $e]);
+            return errorEngineView("error/404", ['error' => $e]);
         }
     }
 }
 
-
-function iView($name, $data = [])
+/*
+ * This function returns the view of a page.
+ */
+function errorEngineView($name, $data = ['error' => 'error'])
 {
     extract($data);
-    return require "app/views/{$name}.view.twig";
+    return require "./core/inc/engine/template.data";
 }
 
 

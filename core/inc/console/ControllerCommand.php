@@ -81,9 +81,8 @@ Class ControllerCommand extends Command implements CommandInterface
             Helper::makeDir($filePath);
         }
 
-        
-        if (!file_exists($filePath.'/'.$name.'Controller.php')) {
-
+        if (!file_exists($filePath.'/'.$name.'Controller.php')) 
+        {
             $fh = fopen($filePath.'/'.$name.'Controller.php', 'w') or die("Can't create file");
             $content = sprintf($this->content, $namespace ,$name);
             fwrite($fh, $content);
@@ -95,7 +94,6 @@ Class ControllerCommand extends Command implements CommandInterface
             $fh = ("Controller already exists");
         }
         
-
         $output->writeln($fh);
     }
 

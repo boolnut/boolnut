@@ -17,7 +17,7 @@ Class ServeCommand extends Command implements CommandInterface
     protected $commandArgumentName = "port";
     protected $commandArgumentDescription = "Port to listen on";
 
-    protected $commandOptionName = "host"; 
+    protected $commandOptionName = "h"; 
     protected $commandOptionDescription = 'Host to listen on';
 
     public function configure()
@@ -48,7 +48,7 @@ Class ServeCommand extends Command implements CommandInterface
 
         $output->writeln("Starting server on $host:$port");
 
-        $command = "php -S $host:$port";
+        $command = "php -q -S $host:$port";
         $output->writeln("Running command: $command");
 
         passthru($command);

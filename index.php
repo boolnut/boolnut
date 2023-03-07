@@ -12,8 +12,10 @@ spl_autoload_register(function ($class_name) {
 
 
 //This is where we load the routes from the routes file.
+
 try {
-	Router::load('bloc/web.php')->direct(Request::uri(), Request::method());
+	$routes = glob('./bloc/*.php');
+	Router::load($routes)->direct(Request::uri(), Request::method());
 } catch (Exception $e) {
 	return $e;
 }

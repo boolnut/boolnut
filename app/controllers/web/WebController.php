@@ -5,7 +5,7 @@
     {
         public function index()
         {
-            echo 'Hello World';
+            echo view('index');
         }
     }
     
