@@ -12,7 +12,18 @@
         "./"
       ]
     },
-
+    "authors": [
+      {
+          "name": "Rejinsha Shahudeen",
+          "email": "Rejinshalb@gmail.com"
+      }
+  ],
+  "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/boolnut/boolnut"
+      }
+    ],
     "require": {
         "php": "^7.4",
         "ext-pdo": "*",
