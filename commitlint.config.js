@@ -19,7 +19,7 @@ module.exports = {
 				}
 				return [
 					false,
-					`header must match format --> BOOL XXX: <message>, NUT XXX: <message>, BUG XXX: <message>, FIX XXX: <message>`,
+					`header must match format --> BOOL-XXX: <message>, NUT-XXX: <message>, BUG-XXX: <message>, FIX-XXX: <message>`,
 				];
 			},
 		],
