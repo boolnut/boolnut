@@ -1,4 +1,5 @@
 <?php
+
 namespace Boolnut\Core\Router;
 
 class Routes
@@ -13,7 +14,7 @@ class Routes
 
     ];
 
-  /*
+    /*
      * This function gets the GET route based on the URI and passes it off to the controller.
      */
     public function get($uri, $controller)
