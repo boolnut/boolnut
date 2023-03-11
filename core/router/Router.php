@@ -15,7 +15,6 @@ class Router extends Routes
 
         $router = new static;
 
-
         if (!is_array($files)) {
             throw new Exception('The routes file must be an array.');
         }
@@ -24,65 +23,23 @@ class Router extends Routes
         }
         foreach ($files as $file) {
             require $file;
-            return $router;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // $arr = array();
-        // foreach ($files as $file) {
-        //     require $file;
-        //     $arr[] = $router;
-        // }
-
-        // $router = $GET = $POST = array();
-        // //   $root = object;
-        // for ($i = 0; $i < count($arr); $i++) {
-        //     foreach ($arr[$i] as $key => $value) {
-        //         $GET =  array_merge($GET, $value['GET']);
-        //         $POST =  array_merge($POST, $value['POST']);
-        //     }
-        //     //   $root['routes'] = $arr[$i]->routes['GET'];
-        //     //  $root['routes']['POST'] =
-
-
-        // }
-        // $router['routes']['GET'] = $GET;
-        // $router['routes']['POST'] = $POST;
-
-        // echo '<pre>';
-        // print_r($router);
-        // die("vf");
-
-        // require_once "./bloc/api.php";
-        // require_once "./bloc/channels.php";
-        // require "./bloc/web.php";
-
-
-        // $out = array();
-        // foreach ($arr as $key => $value) {
-        //     $out[] = (object)array_merge((array)$arr2[$key], (array)$value);
-        // }
-
-
-        // echo '<pre>';
-        // print_r($router);
-        // die("Vf");
-
-        // return $router;
-        // require $files;
-        // return $router;
+        $arr = array();
+        foreach ($files as $file) {
+            require $file;
+            $arr[] = $router;
+        }
+        $GET = $POST = array();
+        for ($i = 0; $i < count($arr); $i++) {
+            foreach ($arr[$i] as $key => $value) {
+                $GET =  array_merge($GET, $value['GET']);
+                $POST =  array_merge($POST, $value['POST']);
+            }
+        }
+        $router->routes['GET'] = $GET;
+        $router->routes['POST'] = $POST;
+        return $router;
     }
 
     /*
@@ -90,24 +47,8 @@ class Router extends Routes
      */
     public function direct($uri, $requestType)
     {
-        // print_r($this->routes);
-        // die("vf");
-
-        // print_r($uri);
-        // print_r($requestType);
-        //die();
-        //  print_r($uri);
-
-        // $this->routes['GET'] = array('login' => 'Web\WebController@index');
-
-        // $this->routes['GET'] = array('api/login' => 'Web\WebController@index');
-
-
 
         if (array_key_exists($uri, $this->routes[$requestType])) {
-
-
-            //die();
             try {
                 return $this->callAction(
                     ...explode('@', $this->routes[$requestType][$uri])
@@ -130,7 +71,6 @@ class Router extends Routes
                 try {
                     return $this->callAction($action[0], $action[1], $matches);
                 } catch (Exception $e) {
-                    die("Vfv");
                     header('HTTP/1.0 404 Not Found');
                     return errorEngineView('error/404');
                 }

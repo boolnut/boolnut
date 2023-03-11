@@ -10,5 +10,3 @@ $router->getArray([
     'api/login' => 'Web\WebController@index',
     'api/checking' => 'Web\WebController@index',
 ]);
-
- //$router->get('', 'web\WebController@index');

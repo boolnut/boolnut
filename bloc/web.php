@@ -9,5 +9,3 @@ $router->getArray([
     #get routes
     '' => 'Web\WebController@index',
 ]);
-
- //$router->get('', 'web\WebController@index');
