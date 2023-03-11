@@ -12,6 +12,7 @@ class Router extends Routes
 
     public static function load($files)
     {
+
         $router = new static;
 
         if (!is_array($files)) {
@@ -20,11 +21,25 @@ class Router extends Routes
         if (empty($files)) {
             throw new Exception('The routes file must not be empty.');
         }
-        foreach ($files as $file)
-        {
+        foreach ($files as $file) {
             require $file;
-            return $router;
         }
+
+        $arr = array();
+        foreach ($files as $file) {
+            require $file;
+            $arr[] = $router;
+        }
+        $GET = $POST = array();
+        for ($i = 0; $i < count($arr); $i++) {
+            foreach ($arr[$i] as $key => $value) {
+                $GET =  array_merge($GET, $value['GET']);
+                $POST =  array_merge($POST, $value['POST']);
+            }
+        }
+        $router->routes['GET'] = $GET;
+        $router->routes['POST'] = $POST;
+        return $router;
     }
 
     /*
@@ -32,12 +47,14 @@ class Router extends Routes
      */
     public function direct($uri, $requestType)
     {
+
         if (array_key_exists($uri, $this->routes[$requestType])) {
             try {
                 return $this->callAction(
                     ...explode('@', $this->routes[$requestType][$uri])
                 );
             } catch (Exception $e) {
+
                 header('HTTP/1.0 404 Unauthorized');
                 return errorEngineView('error/404');
             }
