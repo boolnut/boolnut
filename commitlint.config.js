@@ -12,14 +12,15 @@ module.exports = {
 			2,
 			'always',
 			(parsed) => {
-				const headerRegex = /^((BOOL|NUT|BUG|FIX)-(\d*)):\s(.*)$/;
+				const headerRegex = /^((NUT|BUG|UP)-(\d*)):\s(.*)$/;
 				const isHeaderValid = parsed.header.match(headerRegex);
 				if (isHeaderValid) {
 					return [true];
 				}
 				return [
 					false,
-					`header must match format --> BOOL-XXX: <message>, NUT-XXX: <message>, BUG-XXX: <message>, FIX-XXX: <message>`,
+					`header must match format --> NUT-XXX: <message>, BUG-XXX: <message>, UP-XXX: <message> \n` +
+					`\n NUT = Ticket, BUG = Bug, UP = Update or upgrade or new feature`,
 				];
 			},
 		],

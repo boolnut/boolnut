@@ -12,7 +12,7 @@ class Helper
 
     public static function capitalizedCase($string)
     {
-        return mb_convert_case($string, MB_CASE_TITLE, 'UTF-8');
+        return mb_convert_case($string, MB_CASE_TITLE, "UTF-8");
     }
 
     public static function camelCase($string)
@@ -22,18 +22,16 @@ class Helper
 
     public static function snakeCase($string)
     {
-        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $string));
+        return strtolower(preg_replace("/(?<!^)[A-Z]/", '_$0', $string));
     }
 
     public static function kebabCase($string)
     {
-        return strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $string));
+        return strtolower(preg_replace("/(?<!^)[A-Z]/", '-$0', $string));
     }
 
     public static function lowerCase($string)
     {
         return strtolower($string);
     }
-
-
 }
