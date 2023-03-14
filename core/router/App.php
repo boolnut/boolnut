@@ -1,16 +1,14 @@
 <?php
 namespace Boolnut\Core\Router;
 
-
 use Boolnut\Core\Logger\LogFile;
 use Boolnut\Core\Logger\Logger;
 use Exception;
 
-include 'core/logger/LogFile.php';
+include "core/logger/LogFile.php";
 
 class App
 {
-
     protected static $registry = [];
 
     public static function bind($key, $value)
@@ -29,7 +27,7 @@ class App
     public static function DB()
     {
         try {
-            return static::get('database');
+            return static::get("database");
         } catch (Exception $e) {
             return null;
         }
@@ -38,7 +36,7 @@ class App
     public static function Config()
     {
         try {
-            return static::get('config');
+            return static::get("config");
         } catch (Exception $e) {
             return null;
         }

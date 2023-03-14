@@ -6,5 +6,6 @@ $router = new Router();
 
 $router->getArray([
     #get routes
-    "" => "Web\WebController@index",
+    "api/login" => "Web\WebController@index",
+    "api/checking" => "Web\WebController@index",
 ]);

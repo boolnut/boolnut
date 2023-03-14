@@ -1,11 +1,10 @@
 <?php
-    namespace Boolnut\App\Controllers\Web;
+namespace Boolnut\App\Controllers\Web;
 
-    class WebController
+class WebController
+{
+    public function index()
     {
-        public function index()
-        {
-            echo view('index');
-        }
+        echo view("index");
     }
-    
+}
